@@ -1,250 +1,425 @@
-# Knexion: Agentic Knowledge Orchestrator
+# 🔗 Knexion - Agentic Knowledge Orchestrator
 
-**Connecting concepts, bridging knowledge gaps, delivering trusted answers.**
+<div align="center">
 
-Knexion is an AI-powered knowledge orchestration system that transforms static PDF documents into a living, adaptive knowledge network. By combining knowledge graphs, vector embeddings, and real-time web intelligence, it provides fact-grounded, contextual answers that adapt and improve with every interaction.
+![Student Learning](https://img.shields.io/badge/Student-Learning-blue?style=for-the-badge&logo=graduation-cap)
+![AI Powered](https://img.shields.io/badge/AI-Powered-green?style=for-the-badge&logo=openai)
+![Knowledge Graph](https://img.shields.io/badge/Knowledge-Graph-purple?style=for-the-badge&logo=graphql)
 
-## 🎥 Project Demo
+**An intelligent AI system that transforms your study materials into an interconnected knowledge network**
 
-**[Watch the Complete Project Walkthrough](YOUR_YOUTUBE_LINK_HERE)**
+*Connecting concepts, bridging knowledge gaps, delivering trusted answers.*
 
-*Click above to see Knexion in action - from document upload to intelligent question answering with knowledge graph visualization.*
+[🚀 Demo](#demo) • [📖 Features](#features) • [🏗️ Architecture](#architecture) • [🛠️ Installation](#installation) • [📊 Workflow](#workflow)
+
+</div>
 
 ---
 
-## 🚀 What Makes Knexion Special
+## 🎯 Project Overview
 
-Unlike traditional RAG systems that simply retrieve documents, Knexion creates an interconnected web of knowledge that:
+Knexion is an Agentic Knowledge Orchestrator designed specifically for students who struggle to connect concepts across their course materials. Instead of just retrieving information, Knexion builds a living knowledge graph that understands the relationships between concepts, bridging gaps with web search when needed, and delivering contextual answers that help students learn more effectively.
 
-- **Structures Knowledge**: Converts PDFs into knowledge graphs with entities and relationships
-- **Bridges Gaps**: Autonomously searches the web when local knowledge is insufficient  
-- **Validates Answers**: Multi-layer verification prevents hallucinations and ensures accuracy
-- **Visualizes Connections**: Interactive knowledge graphs show how concepts relate
-- **Learns Continuously**: Each interaction enriches the knowledge base
+### 🎓 Built for Students
 
-## 🏗️ Architecture Overview
+Every student faces the challenge of understanding how different concepts relate to each other across textbooks, lectures, and assignments. Knexion solves this by creating an intelligent knowledge network from your materials and providing answers with full context and concept relationships.
 
+## ✨ Key Features
+
+### 🧠 **Intelligent Knowledge Construction**
+- **PDF Processing**: Upload textbooks, lecture notes, and study materials
+- **Knowledge Graph Creation**: Automatically extracts entities, concepts, and relationships
+- **Vector Embeddings**: Semantic search across your entire knowledge base
+- **Concept Mapping**: Visual representation of how ideas connect
+
+### 🔍 **Hybrid Retrieval System**
+- **Graph-Based Reasoning**: Understands conceptual relationships
+- **Vector Similarity Search**: Finds semantically related content
+- **Adaptive Gap Bridging**: Automatically searches the web when knowledge is incomplete
+- **Context Fusion**: Combines multiple sources for comprehensive answers
+
+### 🤖 **Agentic Workflow**
+- **Quality Validation**: Multiple layers of answer verification
+- **Hallucination Detection**: Ensures responses are grounded in facts
+- **Web Search Integration**: Fills knowledge gaps with external sources
+- **Interactive Learning**: Provides knowledge graph visualizations for better understanding
+
+### 📚 **Student-Centric Design**
+- **Conversational Interface**: Ask questions in natural language
+- **Visual Context**: See how concepts relate through interactive graphs
+- **Source Transparency**: Full traceability of answers to source materials
+- **Multi-Document Support**: Works across entire course materials
+
+---
+
+## 🏗️ System Architecture
+
+```mermaid
+graph TB
+    subgraph "📁 Input Layer"
+        A[PDF Documents] --> B[Document Processing]
+        B --> C[Text Chunking]
+    end
+    
+    subgraph "🧠 Knowledge Construction"
+        C --> D[Knowledge Graph Extraction]
+        C --> E[Vector Embeddings]
+        D --> F[Entity & Relationship Storage]
+        E --> G[TiDB Vector Store]
+    end
+    
+    subgraph "🔍 Retrieval Layer"
+        H[User Query] --> I[Hybrid Retrieval]
+        I --> J[Graph Search]
+        I --> K[Vector Search]
+        F --> J
+        G --> K
+    end
+    
+    subgraph "🤖 Agentic Processing"
+        L[Knowledge Integration] --> M[Answer Generation]
+        M --> N[Quality Validation]
+        N --> O[Web Search if Needed]
+        O --> M
+        J --> L
+        K --> L
+    end
+    
+    subgraph "📊 Output Layer"
+        N --> P[Final Answer]
+        P --> Q[Knowledge Graph Visualization]
+        P --> R[Source Documents]
+    end
+
+    classDef input fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    classDef knowledge fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+    classDef retrieval fill:#e8f5e8,stroke:#1b5e20,stroke-width:2px
+    classDef agent fill:#fff3e0,stroke:#e65100,stroke-width:2px
+    classDef output fill:#fce4ec,stroke:#880e4f,stroke-width:2px
+
+    class A,B,C input
+    class D,E,F,G knowledge
+    class H,I,J,K retrieval
+    class L,M,N,O agent
+    class P,Q,R output
 ```
-📄 PDF Upload → 🧠 Knowledge Graph + 🔍 Vector Embeddings → 💬 Hybrid Retrieval → 🤖 Agent Workflow → ✅ Validated Response
+
+## 🤖 Agentic Workflow
+
+The core intelligence of Knexion lies in its sophisticated decision-making workflow:
+
+```mermaid
+graph TD
+    A[__start__] --> B(start_node)
+    B -- query --> C(retrieve)
+    C -- K.G. + Documents --> D(grade_documents)
+    D --> E(generate)
+    D -- not useful --> F(websearch)
+    E -- useful --> G(end_node)
+    E -- not supported --> E(generate)
+    E -- not useful --> F
+    F --> E
+    G --> I(__end__)
+
+    classDef startend fill:#4caf50,stroke:#2e7d32,stroke-width:2px,color:white
+    classDef process fill:#2196f3,stroke:#1565c0,stroke-width:2px,color:white
+    classDef decision fill:#ff9800,stroke:#ef6c00,stroke-width:2px,color:white
+    classDef search fill:#9c27b0,stroke:#6a1b9a,stroke-width:2px,color:white
+
+    class A,I startend
+    class B,C,E,G process
+    class D decision
+    class F search
 ```
 
-### Core Components
+## 📋 Complete Application Workflow
 
-- **Knowledge Graph**: Entities and relationships extracted using LLM
-- **Vector Store**: Semantic embeddings for similarity search
-- **Agent Workflow**: LangGraph orchestration with quality gates
-- **Web Integration**: Tavily search for knowledge gap filling
-- **Validation Pipeline**: Hallucination detection and answer grading
+```mermaid
+sequenceDiagram
+    participant S as 👨‍🎓 Student
+    participant UI as 🖥️ Streamlit Interface
+    participant API as 🔄 FastAPI Backend
+    participant KG as 📊 Knowledge Graph
+    participant VS as 🔍 Vector Store
+    participant LLM as 🤖 LLM Agent
+    participant WEB as 🌐 Web Search
+
+    S->>UI: Upload PDF Materials
+    UI->>API: Process Documents
+    API->>KG: Extract Entities & Relationships
+    API->>VS: Create Vector Embeddings
+    API->>UI: Confirm Knowledge Base Created
+    
+    S->>UI: Ask Question
+    UI->>API: Send Query
+    API->>LLM: Initialize Agent Workflow
+    
+    LLM->>KG: Retrieve Relevant Concepts
+    LLM->>VS: Semantic Document Search
+    LLM->>LLM: Grade Document Relevance
+    
+    alt Documents Sufficient
+        LLM->>LLM: Generate Answer
+        LLM->>LLM: Validate Quality & Grounding
+    else Knowledge Gap Detected
+        LLM->>WEB: Search External Sources
+        LLM->>LLM: Integrate Web Results
+        LLM->>LLM: Generate Enhanced Answer
+    end
+    
+    LLM->>API: Return Answer + Context
+    API->>UI: Deliver Response
+    UI->>S: Show Answer + Knowledge Graph + Sources
+```
+
+---
 
 ## 🛠️ Technology Stack
 
-| Component | Technology |
-|-----------|------------|
-| **Frontend** | Streamlit |
-| **Backend API** | FastAPI |
-| **Database** | TiDB (Vector + Graph storage) |
-| **LLM** | Google Gemini 2.0 Flash |
-| **Embeddings** | OpenAI text-embedding-3-small |
-| **Workflow** | LangGraph |
-| **Web Search** | Tavily API |
-| **Visualization** | PyVis |
+### 🧠 **AI & LLM Framework**
+- **LangGraph**: Advanced agent workflow orchestration
+- **Google Gemini**: Primary LLM for reasoning and generation
+- **OpenAI Embeddings**: Vector embeddings for semantic search
+- **DSPy**: Structured prompting and knowledge extraction
+- **Tavily Search**: Web search integration
+
+### 🗄️ **Database & Storage**
+- **TiDB**: Vector database for embeddings and knowledge graph storage
+- **SQLite**: Conversation state management and checkpointing
+- **Pyvis**: Interactive knowledge graph visualization
+
+### 🚀 **Application Framework**
+- **Streamlit**: Interactive web interface
+- **FastAPI**: High-performance backend API
+- **LangChain**: Document processing and retrieval
+- **Pydantic**: Data validation and structured outputs
+
+---
+
+## 📥 Installation & Setup
+
+### 1️⃣ **Clone the Repository**
+```bash
+git clone https://github.com/yourusername/knexion.git
+cd knexion
+```
+
+### 2️⃣ **Create Virtual Environment**
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
+
+### 3️⃣ **Install Dependencies**
+```bash
+pip install -r requirements.txt
+```
+
+### 4️⃣ **Environment Configuration**
+Create a `.env` file with the following variables:
+
+```env
+# LLM API Keys
+OPENAI_API_KEY=your_openai_api_key
+GOOGLE_API_KEY=your_google_api_key
+
+# TiDB Configuration
+TIDB_CONNECTION_STRING=your_tidb_connection_string
+TIDB_HOST_NAME=your_tidb_host
+TIDB_PORT_NUMBER=4000
+TIDB_USERNAME=your_tidb_username
+TIDB_PASSWORD=your_tidb_password
+TIDB_DATABASE_NAME=your_database_name
+
+# Web Search
+TAVILY_API_KEY=your_tavily_api_key
+```
+
+### 5️⃣ **Create Cache Directory**
+```bash
+mkdir -p .cache/graph
+```
+
+---
+
+## 🚀 Usage
+
+### **Start the Application**
+
+**1. Start the Backend Server:**
+```bash
+python api_server.py
+```
+
+**2. Launch the Frontend Interface:**
+```bash
+streamlit run streamlit_interface.py
+```
+
+### **Using Knexion for Learning**
+
+1. **📁 Upload Study Materials**
+   - Upload PDF textbooks, lecture notes, or course materials
+   - System automatically processes and creates knowledge base
+   - Wait for confirmation of successful processing
+
+2. **💭 Ask Questions**
+   - Type questions in natural language
+   - Ask about concepts, relationships, or specific topics
+   - Request explanations or connections between ideas
+
+3. **🔍 Explore Context**
+   - Click "View Context" on any answer
+   - Explore interactive knowledge graphs
+   - See source documents that informed the answer
+
+4. **📚 Build Understanding**
+   - Ask follow-up questions to deepen understanding
+   - Explore concept relationships through visualizations
+   - Use multiple conversation threads for different topics
+
+---
 
 ## 📁 Project Structure
 
 ```
 knexion/
-├── streamlit_interface.py    # Streamlit UI components and chat interface
-├── api_server.py            # FastAPI backend with REST endpoints
-├── workflow_orchestrator.py # LangGraph agent workflow and routing
-├── llm_chains.py           # LLM evaluation chains and grading
-├── knowledge_store.py      # TiDB operations for KG and vectors
-├── requirements.txt        # Python dependencies
-├── .env.example           # Environment variables template
-└── README.md              # This file
+├── streamlit_interface.py     # Streamlit web interface
+├── api_server.py             # FastAPI backend server
+├── workflow_orchestrator.py  # LangGraph agent workflow
+├── llm_chains.py            # LLM evaluation chains
+├── knowledge_store.py       # Database operations (TiDB)
+├── requirements.txt         # Python dependencies
+├── .env.example            # Environment variables template
+├── .cache/                 # Cached knowledge graphs
+│   └── graph/             # Generated visualizations
+└── README.md              # Project documentation
 ```
 
-## 🚀 Quick Start
+## 🎓 Use Cases for Students
 
-### Prerequisites
+### 📖 **Literature Studies**
+- Upload multiple novels and analyze thematic connections
+- Understand character relationships across different works
+- Explore literary movements and their influences
 
-- Python 3.8+
-- TiDB Cloud account
-- OpenAI API key
-- Tavily API key
-- Google AI API key
+### 🧬 **Science Courses**
+- Connect biological processes across different chapters
+- Understand chemical reactions and their applications
+- Link physics concepts to real-world phenomena
 
-### Installation
+### 📚 **History Learning**
+- Map historical events and their causal relationships
+- Connect different time periods and civilizations
+- Understand the progression of ideas and movements
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/yourusername/knexion.git
-   cd knexion
-   ```
-
-2. **Install dependencies**
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. **Set up environment variables**
-   ```bash
-   cp .env.example .env
-   # Edit .env with your API keys and database credentials
-   ```
-
-4. **Create cache directory**
-   ```bash
-   mkdir -p .cache/graph
-   ```
-
-### Environment Variables
-
-Create a `.env` file with the following variables:
-
-```env
-# TiDB Configuration
-TIDB_CONNECTION_STRING=mysql+pymysql://username:password@host:port/database
-TIDB_HOST_NAME=your-tidb-host
-TIDB_PORT_NUMBER=4000
-TIDB_USERNAME=your-username
-TIDB_PASSWORD=your-password
-TIDB_DATABASE_NAME=your-database
-
-# API Keys
-OPENAI_API_KEY=your-openai-api-key
-GOOGLE_API_KEY=your-google-ai-api-key
-TAVILY_API_KEY=your-tavily-api-key
-```
-
-### Running the Application
-
-1. **Start the backend server**
-   ```bash
-   python api_server.py
-   ```
-
-2. **Launch the frontend** (in a new terminal)
-   ```bash
-   streamlit run streamlit_interface.py
-   ```
-
-3. **Open your browser**
-   Navigate to `http://localhost:8501`
-
-## 💡 How to Use
-
-### 1. Upload Documents
-- Click "Choose PDF files" to upload your documents
-- Wait for processing (knowledge graph creation + vector embedding)
-- System creates a new conversation thread automatically
-
-### 2. Ask Questions
-- Type questions about your uploaded documents
-- Get answers enriched with both structured knowledge and semantic context
-- View knowledge graph visualizations by clicking "View Context"
-
-### 3. Explore Knowledge
-- Interactive knowledge graphs show entity relationships
-- Document context reveals source material for transparency
-- Thread management allows multiple conversation histories
-
-## 🔧 Advanced Configuration
-
-### Chunk Size Settings
-Modify in `api_server.py`:
-```python
-CHUNK_SIZE = 1000      # Adjust based on document complexity
-CHUNK_OVERLAP = 200    # Overlap for context preservation
-```
-
-### Knowledge Graph Depth
-Modify in `knowledge_store.py`:
-```python
-def retrieve_knowledge_graph(query, metadata, max_depth=3, top_k=10):
-    # Adjust max_depth for broader/narrower context
-```
-
-### Model Configuration
-Modify in `llm_chains.py`:
-```python
-llm_model = ChatGoogleGenerativeAI(
-    model="gemini-2.0-flash",
-    temperature=0  # Adjust for creativity vs consistency
-)
-```
-
-## 🔍 Agent Workflow
-
-The system follows this intelligent decision process:
-
-1. **Retrieve**: Get context from knowledge graph + vector search
-2. **Grade Documents**: Evaluate relevance of retrieved content
-3. **Generate**: Create answer using hybrid context
-4. **Validate**: Check for hallucinations and answer quality
-5. **Web Search**: Fetch external knowledge if gaps detected
-6. **Iterate**: Regenerate with enriched context until satisfied
-
-## 🎯 Key Features
-
-### Hybrid Retrieval System
-- **Semantic Search**: Vector similarity for document passages
-- **Graph Reasoning**: Entity relationships for structured knowledge
-- **Dynamic Fusion**: Intelligent combination of both approaches
-
-### Quality Assurance Pipeline
-- **Relevance Grading**: Filter irrelevant retrieved documents
-- **Hallucination Detection**: Ensure answers are grounded in facts
-- **Answer Quality**: Verify responses address user questions
-- **Iterative Improvement**: Regenerate until quality thresholds met
-
-### Knowledge Gap Bridging
-- **Automatic Detection**: Identify when local knowledge is insufficient
-- **Web Search Integration**: Fetch external information seamlessly
-- **Context Augmentation**: Enrich responses with real-time data
-
-## 📊 Performance Considerations
-
-- **Vector Search**: Optimized with TiDB's native vector operations
-- **Graph Traversal**: BFS algorithm with configurable depth limits
-- **Caching**: Knowledge graph visualizations cached for reuse
-- **Batch Processing**: Efficient document chunking and embedding
-
-## 🛡️ Security & Privacy
-
-- **API Key Management**: Secure environment variable handling
-- **File Validation**: PDF type checking and size limits
-- **Path Security**: Directory traversal protection
-- **Data Isolation**: Thread-based data separation
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- **TiDB** for vector database capabilities
-- **LangGraph** for workflow orchestration
-- **Streamlit** for rapid UI development
-- **OpenAI** for embedding models
-- **Google AI** for language models
-- **Tavily** for web search integration
-
-## 📞 Support
-
-- Create an issue for bugs or feature requests
-- Check existing issues before creating new ones
-- Provide detailed information for faster resolution
+### 💼 **Business Studies**
+- Relate theoretical concepts to case studies
+- Understand market dynamics and economic principles
+- Connect strategy frameworks to practical applications
 
 ---
 
-**Built with ❤️ for the future of knowledge work**
+## 🎯 Key Benefits for Students
 
-*Transform your documents into intelligent, interconnected knowledge that grows smarter with every question.*
+### 🧩 **Concept Connection**
+- Automatically identifies relationships between ideas
+- Helps understand how concepts build upon each other
+- Reveals hidden connections across course materials
+
+### 🎯 **Personalized Learning**
+- Adapts to your specific study materials
+- Maintains conversation context for deeper discussions
+- Provides explanations tailored to your knowledge level
+
+### 🔍 **Research Enhancement**
+- Automatically finds relevant external sources
+- Validates information against multiple sources
+- Provides comprehensive answers with full context
+
+### 📊 **Visual Learning**
+- Interactive knowledge graph visualizations
+- See concept relationships at a glance
+- Better understanding through visual connections
+
+---
+
+## 🚀 Future Enhancements
+
+### 📱 **Enhanced User Experience**
+- Mobile application for on-the-go studying
+- Voice interaction for hands-free learning
+- Integration with note-taking applications
+- Collaborative study group features
+
+### 🧠 **Advanced AI Capabilities**
+- Multi-modal support (images, diagrams, videos)
+- Personalized learning path recommendations
+- Automatic quiz generation from materials
+- Learning progress tracking and analytics
+
+### 🔗 **Extended Integrations**
+- Integration with popular LMS platforms
+- Support for more document formats
+- Real-time collaboration features
+- Export capabilities for notes and summaries
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions from students, educators, and developers! Here's how you can help:
+
+1. **🍴 Fork the repository**
+2. **🌿 Create a feature branch** (`git checkout -b feature/amazing-feature`)
+3. **💻 Make your changes** and test thoroughly
+4. **📝 Commit your changes** (`git commit -m 'Add amazing feature'`)
+5. **🚀 Push to the branch** (`git push origin feature/amazing-feature`)
+6. **🎯 Open a Pull Request**
+
+### 🐛 **Bug Reports**
+Found an issue? Please open a GitHub issue with:
+- Detailed description of the problem
+- Steps to reproduce the issue
+- Expected vs actual behavior
+- Screenshots if applicable
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 🙏 Acknowledgments
+
+### 🎓 **Educational Community**
+- Students worldwide who inspired this project
+- Educators providing feedback on learning challenges
+- Open source community for amazing tools and libraries
+
+### 🛠️ **Technology Partners**
+- **TiDB** for vector database capabilities
+- **LangChain** for document processing frameworks
+- **Streamlit** for rapid UI development
+- **OpenAI** and **Google** for AI capabilities
+
+---
+
+<div align="center">
+
+**Built with ❤️ for Students Everywhere**
+
+### 📞 Contact & Support
+
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/yourusername/knexion)
+[![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:your.email@example.com)
+
+**🔗 Transforming the way students learn, one connection at a time 🔗**
+
+---
+
+<sub>⭐ Star this repo if it helps your learning journey! ⭐</sub>
+
+</div>

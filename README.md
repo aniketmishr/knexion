@@ -196,18 +196,18 @@ sequenceDiagram
 
 ---
 
-## 📥 Installation & Setup
+## 📥 Installation & Setup (Run Instruction)
 
 ### 1️⃣ **Clone the Repository**
 ```bash
-git clone https://github.com/yourusername/knexion.git
+git clone https://github.com/aniketmishr/knexion.git
 cd knexion
 ```
 
 ### 2️⃣ **Create Virtual Environment**
 ```bash
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+python -m venv .venv
+source .venv/bin/activate  # On Windows: venv\Scripts\activate
 ```
 
 ### 3️⃣ **Install Dependencies**
@@ -216,7 +216,7 @@ pip install -r requirements.txt
 ```
 
 ### 4️⃣ **Environment Configuration**
-Create a `.env` file with the following variables:
+Create a `.env` file in backend folder with the following variables:
 
 ```env
 # LLM API Keys
@@ -235,26 +235,23 @@ TIDB_DATABASE_NAME=your_database_name
 TAVILY_API_KEY=your_tavily_api_key
 ```
 
-### 5️⃣ **Create Cache Directory**
-```bash
-mkdir -p .cache/graph
-```
-
----
-
-## 🚀 Usage
 
 ### **Start the Application**
 
 **1. Start the Backend Server:**
 ```bash
-python api_server.py
+cd backend
+uvicorn api_server:app --host 0.0.0.0 --port 8000
+
 ```
 
 **2. Launch the Frontend Interface:**
+Open a new terminal in root folder (Knexion)
 ```bash
+cd frontend
 streamlit run streamlit_interface.py
 ```
+Open `http://localhost:8501/` in a browser
 
 ### **Using Knexion for Learning**
 
@@ -284,16 +281,20 @@ streamlit run streamlit_interface.py
 
 ```
 knexion/
-├── streamlit_interface.py     # Streamlit web interface
-├── api_server.py             # FastAPI backend server
-├── workflow_orchestrator.py  # LangGraph agent workflow
-├── llm_chains.py            # LLM evaluation chains
-├── knowledge_store.py       # Database operations (TiDB)
-├── requirements.txt         # Python dependencies
-├── .env.example            # Environment variables template
-├── .cache/                 # Cached knowledge graphs
-│   └── graph/             # Generated visualizations
-└── README.md              # Project documentation
+├── backend/                   
+│   ├── api_server.py           # FastAPI backend server
+│   ├── workflow_orchestrator.py# LangGraph agent workflow
+│   ├── llm_chains.py           # LLM evaluation chains
+│   ├── knowledge_store.py      # Database operations (TiDB)
+│   ├── .env.example            # Environment variables template
+│   └── .cache/                 # Cached knowledge graphs
+│       └── graph/              # Generated visualizations
+│
+├── frontend/
+│   └── streamlit_interface.py  # Streamlit web interface
+│
+├── requirements.txt            # Python dependencies
+└── README.md                   # Project documentation
 ```
 
 ## 🎓 Use Cases for Students
@@ -413,8 +414,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ### 📞 Contact & Support
 
-[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/yourusername/knexion)
-[![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:your.email@example.com)
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/aniketmishr/knexion)
+[![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:aniketmishra3476@gmail.com)
 
 **🔗 Transforming the way students learn, one connection at a time 🔗**
 

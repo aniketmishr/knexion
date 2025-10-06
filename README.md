@@ -56,19 +56,22 @@ Every student faces the challenge of understanding how different concepts relate
 
 ```mermaid
 graph TB
-    subgraph "📁 Input Layer"
+    %% Input Layer
+    subgraph InputLayer["📁 Input Layer"]
         A[PDF Documents] --> B[Document Processing]
         B --> C[Text Chunking]
     end
     
-    subgraph "🧠 Knowledge Construction"
+    %% Knowledge Construction
+    subgraph KnowledgeLayer["🧠 Knowledge Construction"]
         C --> D[Knowledge Graph Extraction]
         C --> E[Vector Embeddings]
         D --> F[Entity & Relationship Storage]
         E --> G[TiDB Vector Store]
     end
     
-    subgraph "🔍 Retrieval Layer"
+    %% Retrieval Layer
+    subgraph RetrievalLayer["🔍 Retrieval Layer"]
         H[User Query] --> I[Hybrid Retrieval]
         I --> J[Graph Search]
         I --> K[Vector Search]
@@ -76,7 +79,8 @@ graph TB
         G --> K
     end
     
-    subgraph "🤖 Agentic Processing"
+    %% Agentic Processing
+    subgraph AgentLayer["🤖 Agentic Processing"]
         L[Knowledge Integration] --> M[Answer Generation]
         M --> N[Quality Validation]
         N --> O[Web Search if Needed]
@@ -85,23 +89,30 @@ graph TB
         K --> L
     end
     
-    subgraph "📊 Output Layer"
+    %% Output Layer
+    subgraph OutputLayer["📊 Output Layer"]
         N --> P[Final Answer]
         P --> Q[Knowledge Graph Visualization]
         P --> R[Source Documents]
     end
 
-    classDef input fill:#e1f5fe,stroke:#01579b,stroke-width:2px
-    classDef knowledge fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
-    classDef retrieval fill:#e8f5e8,stroke:#1b5e20,stroke-width:2px
-    classDef agent fill:#fff3e0,stroke:#e65100,stroke-width:2px
-    classDef output fill:#fce4ec,stroke:#880e4f,stroke-width:2px
+    %% Node Styling
+    classDef input fill:#E3F2FD,stroke:#0D47A1,stroke-width:2px,rx:10,ry:10,font-weight:bold,color:#0D47A1,font-size:16px
+    classDef knowledge fill:#F3E5F5,stroke:#6A1B9A,stroke-width:2px,rx:10,ry:10,font-weight:bold,color:#4A148C,font-size:16px
+    classDef retrieval fill:#E8F5E9,stroke:#2E7D32,stroke-width:2px,rx:10,ry:10,font-weight:bold,color:#1B5E20,font-size:16px
+    classDef agent fill:#FFF3E0,stroke:#EF6C00,stroke-width:2px,rx:10,ry:10,font-weight:bold,color:#E65100,font-size:16px
+    classDef output fill:#FCE4EC,stroke:#880E4F,stroke-width:2px,rx:10,ry:10,font-weight:bold,color:#880E4F,font-size:16px
 
+    %% Apply classes
     class A,B,C input
     class D,E,F,G knowledge
     class H,I,J,K retrieval
     class L,M,N,O agent
     class P,Q,R output
+
+    %% Style arrows
+    linkStyle default stroke:#FF0000,stroke-width:3px
+
 ```
 
 ## 🤖 Agentic Workflow

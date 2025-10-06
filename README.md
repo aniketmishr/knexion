@@ -147,6 +147,7 @@ graph TD
 
 ```mermaid
 sequenceDiagram
+    %% Participants
     participant S as 👨‍🎓 Student
     participant UI as 🖥️ Streamlit Interface
     participant API as 🔄 FastAPI Backend
@@ -155,20 +156,24 @@ sequenceDiagram
     participant LLM as 🤖 LLM Agent
     participant WEB as 🌐 Web Search
 
+    %% Upload PDFs Flow
     S->>UI: Upload PDF Materials
     UI->>API: Process Documents
     API->>KG: Extract Entities & Relationships
     API->>VS: Create Vector Embeddings
-    API->>UI: Confirm Knowledge Base Created
-    
+    API-->>UI: ✅ Knowledge Base Created
+
+    %% Query Flow
     S->>UI: Ask Question
     UI->>API: Send Query
     API->>LLM: Initialize Agent Workflow
-    
+
+    %% Retrieval & Relevance
     LLM->>KG: Retrieve Relevant Concepts
     LLM->>VS: Semantic Document Search
     LLM->>LLM: Grade Document Relevance
-    
+
+    %% Conditional Answer Generation
     alt Documents Sufficient
         LLM->>LLM: Generate Answer
         LLM->>LLM: Validate Quality & Grounding
@@ -177,10 +182,13 @@ sequenceDiagram
         LLM->>LLM: Integrate Web Results
         LLM->>LLM: Generate Enhanced Answer
     end
-    
-    LLM->>API: Return Answer + Context
-    API->>UI: Deliver Response
-    UI->>S: Show Answer + Knowledge Graph + Sources
+
+    %% Return Answer
+    LLM-->>API: Return Answer + Context
+    API-->>UI: Deliver Response
+    UI-->>S: Show Answer + Knowledge Graph + Sources
+
+
 ```
 
 ---
